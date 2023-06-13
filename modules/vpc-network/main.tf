@@ -91,6 +91,10 @@ resource "google_compute_router_nat" "vpc_nat" {
     name                    = google_compute_subnetwork.vpc_subnetwork_public.self_link
     source_ip_ranges_to_nat = ["ALL_IP_RANGES"]
   }
+
+  lifecycle {
+    ignore_changes = [min_ports_per_vm, log_config, subnetwork]
+  }
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
